@@ -1,0 +1,37 @@
+type Query {
+  productByHandle(handle: String!): Product
+  collectionByHandle(handle: ID!): Collection
+}
+
+type Collection {
+  id: ID!
+  products(first: Int!): ProductConnection!
+}
+
+type ProductConnection {
+  edges: [ProductEdge!]!
+}
+
+type ProductEdge {
+  node: Product!
+}
+
+type Product {
+  id: ID!
+  title: String!
+  description: String!
+  handle: String!
+  images(first: Int!): ImageConnection!
+}
+
+type ImageConnection {
+  edges: [ImageEdge!]!
+}
+
+type ImageEdge {
+  node: Image!
+}
+
+type Image {
+  transformedSrc(maxWidth: Int!): String!
+}
