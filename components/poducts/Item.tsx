@@ -3,7 +3,14 @@ import styled from 'styled-components'
 
 import Link from 'next/link'
 
-import { Product } from './types'
+import { Image } from '../../graphql/types'
+
+interface Props {
+  title?: string
+  description?: string
+  handle?: string
+  images?: Image[]
+}
 
 const ItemStyled = styled.div`
   flex: 1;
@@ -15,17 +22,11 @@ const LinkStyled = styled.a`
   cursor: pointer;
 `
 
-type Props = {
-  product: Product['node']
-}
-
-const Item: FC<Props> = ({
-  product: { handle, title, description, images },
-}) => (
+const Item: FC<Props> = ({ handle, title, description, images }) => (
   <ItemStyled>
     <Link href={{ pathname: `/${handle}` }} passHref>
       <LinkStyled>
-        <img src={images?.edges?.[0]?.node?.transformedSrc} alt={title} />
+        <img src={images[0].transformedSrc} alt={title} />
         <h3>{title}</h3>
         <p>{description}</p>
       </LinkStyled>

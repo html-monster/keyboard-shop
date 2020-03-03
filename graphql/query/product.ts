@@ -31,10 +31,11 @@ export const getProduct = gql`
       id
       title
       description
+      handle
       images(first: 1) {
         edges {
           node {
-            transformedSrc(maxWidth: 300)
+            transformedSrc(maxWidth: 600)
           }
         }
       }

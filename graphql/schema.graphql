@@ -1,11 +1,11 @@
 type Query {
-  productByHandle(handle: String!): Product
-  collectionByHandle(handle: ID!): Collection
+  productByHandle(handle: String): Product
+  collectionByHandle(handle: String): Collection
 }
 
 type Collection {
-  id: ID!
-  products(first: Int!): ProductConnection!
+  id: ID
+  products(first: Int): ProductConnection!
 }
 
 type ProductConnection {
@@ -17,11 +17,11 @@ type ProductEdge {
 }
 
 type Product {
-  id: ID!
+  id: ID
   title: String!
   description: String!
   handle: String!
-  images(first: Int!): ImageConnection!
+  images(first: Int): ImageConnection!
 }
 
 type ImageConnection {
@@ -33,5 +33,5 @@ type ImageEdge {
 }
 
 type Image {
-  transformedSrc(maxWidth: Int!): String!
+  transformedSrc(maxWidth: Int): String!
 }

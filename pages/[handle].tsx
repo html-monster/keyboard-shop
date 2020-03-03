@@ -4,15 +4,16 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { getProduct } from '../graphql/query/product'
+import { getImages } from '../serviceUtils'
 
 import SingleProduct from '../components/singleProduct/SingleProduct'
 
-import { Data } from '../components/singleProduct/types'
+import { DataSingle } from '../graphql/types'
 
 const SingleProductPage = () => {
   const router = useRouter()
   const { handle } = router.query
-  const { loading, error, data } = useQuery<Data>(getProduct, {
+  const { loading, error, data } = useQuery<DataSingle>(getProduct, {
     variables: { handle },
   })
 
@@ -26,7 +27,7 @@ const SingleProductPage = () => {
     return <p>No Item Found for {handle}</p>
   }
 
-  const { id, title, description, images } = data.productByHandle
+  const { title, description, images } = data.productByHandle
 
   return (
     <>
@@ -34,10 +35,9 @@ const SingleProductPage = () => {
         <title>Products | {title}</title>
       </Head>
       <SingleProduct
-        id={id}
         title={title}
         description={description}
-        images={images}
+        imageSrc={getImages(images)[0].transformedSrc}
       />
     </>
   )

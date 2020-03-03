@@ -14,7 +14,6 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    'comma-dangle': ['error', 'always-multiline'],
     'import/extensions': ['error', 'never', { css: 'always', json: 'always' }],
     'max-len': ['error', 135],
     'no-restricted-imports': ['warn', 'prop-types'],
@@ -28,6 +27,6 @@ module.exports = {
     'require-await': 'error',
     'symbol-description': 'off',
     'no-console': 'error',
-    curly: [2, 'all'],
+    'curly': [2, 'all'],
   },
 }

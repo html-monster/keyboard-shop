@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
+import { getImages } from '../../serviceUtils'
+
 import Item from './Item'
 
-import { Product } from './types'
+import { Product } from '../../graphql/types'
 
 const ItemsListStyles = styled.div`
   display: flex;
@@ -12,14 +14,20 @@ const ItemsListStyles = styled.div`
 `
 
 type Props = {
-  products?: Product[]
+  products: Product[]
 }
 
-const ProductsContainer: FC<Props> = ({ products = [] }) => {
+const ProductsContainer: FC<Props> = ({ products }) => {
   return (
     <ItemsListStyles>
-      {products.map(({ node }) => (
-        <Item product={node} key={node.id} />
+      {products.map(({ id, handle, title, description, images }) => (
+        <Item
+          key={id}
+          handle={handle}
+          title={title}
+          description={description}
+          images={getImages(images)}
+        />
       ))}
     </ItemsListStyles>
   )

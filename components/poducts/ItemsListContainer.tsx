@@ -3,12 +3,14 @@ import { useQuery } from 'react-apollo'
 
 import { getAllProducts } from '../../graphql/query/product'
 
+import { getProducts } from '../../serviceUtils'
+
 import Products from './ItemsList'
 
-import { Data } from './types'
+import { DataCollection } from '../../graphql/types'
 
 const ItemsListContainer: FC = () => {
-  const { loading, error, data } = useQuery<Data>(getAllProducts)
+  const { loading, error, data } = useQuery<DataCollection>(getAllProducts)
   if (loading) {
     return <p>Loading...</p>
   }
@@ -16,7 +18,7 @@ const ItemsListContainer: FC = () => {
     return <p>Error: {error.message}</p>
   }
 
-  const products = data?.collectionByHandle?.products?.edges
+  const products = getProducts(data)
 
   return <Products products={products} />
 }
